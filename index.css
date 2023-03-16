@@ -2,9 +2,12 @@
   --mainLight: #3f8c8c;
   --mainDark: #285959;
   --white: #ebebeb;
+  --yellow: #fec230;
+  --orange: #ff6584;
 
   --borderRadius: 6px;
   --boxShadow: 2px 2px 10px var(--mainDark);
+  --boxShadowHover: 2px 2px 20px var(--mainDark);
 
   font-size: 16px;
 
@@ -13,18 +16,24 @@
   color: var(--mainDark);
 }
 
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #tiles {
-  /* display: flex;
+  display: flex;
   gap: 2rem;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  flex-wrap: wrap; */
+  flex-wrap: wrap;
 
-  display: grid;
+  /* display: grid;
   grid-gap: 2rem;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: auto; */
 }
 
 .tile-component {
@@ -37,11 +46,61 @@
   box-shadow: var(--boxShadow);
   background-color: var(--mainLight);
 
-  transition: background-color 0.4s linear;
-  transition: color 0.4s ease-in;
+  transition: all 0.3s linear;
 }
 
 .tile-component:hover {
   background-color: var(--mainDark);
   color: var(--white);
+  transform: scale(105%);
+  box-shadow: var(--boxShadowHover);
+}
+
+#animation {
+  overflow: hidden;
+  background-image: url("http://getdrawings.com/vectors/cloud-vector-png-31.png");
+  background-size: contain;
+  margin-bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#sun {
+  background-color: var(--yellow);
+  border-radius: 50%;
+  height: 12rem;
+  aspect-ratio: 1 / 1;
+  animation: 4s linear 0s infinite alternate animating-multiple-properties;
+}
+
+@keyframes animating-multiple-properties {
+  from {
+    transform: translateY(110%);
+    background-color: var(--orange);
+    filter: brightness(75%);
+  }
+  to {
+    transform: translateY(0);
+    background-color: var(--yellow);
+    filter: brightness(100%);
+  }
+}
+
+#planet svg > path[id="east"] {
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+
+#planet:hover svg > path[id="east"] {
+  opacity: 1;
+}
+
+#planet svg > path[id="west"] {
+  transition: opacity 0.2s linear infinite;
+}
+
+#planet:hover svg > path[id="west"] {
+  opacity: 0;
 }
